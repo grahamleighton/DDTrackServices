@@ -1,0 +1,47 @@
+@using System.Web.Http
+@using System.Web.Http.Controllers
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using DDTrackServices.Areas.HelpPage.Models
+@model Collection<ApiDescription>
+
+@{
+    ViewBag.Title = "DDTrackServices Web API Help Page";
+
+    // Group APIs by controller
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+}
+
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+<header class="help-page">
+    <div class="content-wrapper">
+        <div class="float-left">
+            <h1>@ViewBag.Title</h1>
+        </div>
+    </div>
+</header>
+<div id="body" class="help-page">
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>Introduction</h2>
+            <p>
+                Below are the services you can use to interact with the API.
+                <ul id="apilinks">
+                    <li><a href="#Login">Login</a></li>
+                    <li><a href="#Account">Account</a></li>
+                    <li><a href="#User">User</a></li>
+                    <li><a href="#Supplier">Supplier</a></li>
+                    <li><a href="#Test">Test</a></li>
+                    <li><a href="#LoginSec">Login Security</a></li>
+                    <li><a href="#Barcode">Hermes/Barcode</a></li>
+                </ul>
+            </p>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        @foreach (var group in apiGroups)
+        {
+            @Html.DisplayFor(m => group, "ApiGroup")
+        }
+    </section>
+</div>
