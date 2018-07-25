@@ -33,11 +33,13 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - DD Track 2 Web Services</p>
+			@Html.Raw(File.ReadAllText(Server.MapPath("~/publish.htm")))
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+	
 </body>
 </html>
